@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,7 @@ Route::get('/', function () {
     return "asdasdasd";
 });
 
-Route::get("export",[\App\Http\Controllers\ExcelController::class,'Export'])->name('export');
-Route::get("index",[\App\Http\Controllers\ExcelController::class,'index'])->name('import');
-Route::post("import",[\App\Http\Controllers\ExcelController::class,'Import'])->name('import');
-Route::get("makePdf",[\App\Http\Controllers\PdfController::class,'makePdf']);
+Route::get("export",[ExcelController::class,'Export'])->name('export');
+Route::get("index",[ExcelController::class,'index'])->name('import');
+Route::post("import",[ExcelController::class,'Import'])->name('import');
+Route::get("makePdf",[PdfController::class,'makePdf']);
