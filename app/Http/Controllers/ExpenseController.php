@@ -22,6 +22,7 @@ class ExpenseController extends Controller
         if (isset($request->currentData)){
             return Expense::with('category')
                 ->whereMonth('spend_on', $request->currentData)
+                ->orderBy('spend_on')
                 ->get();
         }
         else if (isset($request->fromDate) && isset($request->toDate))
@@ -29,12 +30,13 @@ class ExpenseController extends Controller
             return Expense::with('category')
                 ->whereDate('spend_on','>=', $request->fromDate)
                 ->whereDate('spend_on','<=', $request->toDate)
-
+                ->orderBy('spend_on')
                 ->get();
         }
         else
         {
             return Expense::with('category')
+                ->orderBy('spend_on')
                 ->get();
         }
 
