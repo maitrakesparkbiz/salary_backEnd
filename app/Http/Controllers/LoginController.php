@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use mysql_xdevapi\Exception;
 
 class LoginController extends Controller
 {
@@ -25,12 +26,18 @@ class LoginController extends Controller
     }
     public function register(Request $request)
     {
-        $name= explode("@",$request->email);
-        $user = [
-            'name'=>$name[0],
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ];
-        return User::create($user);
+        try{
+            $name= explode("@",$request->email);
+            $user = [
+                'name'=>$name[0],
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ];
+            return User::create($user);
+        }
+        catch (\Exception $e){
+            return $e->getCode();
+        }
+
     }
 }
