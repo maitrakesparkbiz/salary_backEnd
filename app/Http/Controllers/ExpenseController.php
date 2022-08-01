@@ -11,8 +11,12 @@ class ExpenseController extends Controller
 {
     public function add(Request $request)
     {
+        try{
 //        Expense::Create($request->all());
-        return Expense::updateOrCreate(['id'=> $request['id']],$request->all());
+          return Expense::updateOrCreate(['id'=> $request['id']],$request->all());
+       }catch (\Exception $e){
+        return false;
+        }
     }
 
 
@@ -55,13 +59,20 @@ class ExpenseController extends Controller
 
     public  function delete($id)
     {
+        try {
             Expense::find($id)->delete();
+        }catch (\Exception $e){
+            return false;
+        }
     }
 
     public function categoryAdd(Request $request)
     {
-
-        Category::Create($request->all());
+        try {
+            Category::Create($request->all());
+        }catch (\Exception $e){
+            return false;
+        }
     }
 
     public function categoryList()
