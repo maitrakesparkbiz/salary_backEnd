@@ -13,12 +13,24 @@ class Category extends Model
         'name',
         'parent_id'
     ];
+    protected $parentColumn = 'parent_id';
     public function category()
     {
         return $this->belongsTo(Expense::class,'category','id');
     }
-    public function parentCategory()
+
+    public function parent()
     {
-        return $this->belongsTo(Category::class,'id','parent_id');
+        return $this->belongsTo(Category::class,$this->parentColumn);
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, $this->parentColumn);
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
     }
 }

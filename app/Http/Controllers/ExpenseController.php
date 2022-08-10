@@ -78,6 +78,6 @@ class ExpenseController extends Controller
 
     public function categoryList($id)
     {
-        return Category::where('parent_id',$id)->get();
+        return Category::with('parent')->where('parent_id',$id)->get();
     }
 }
