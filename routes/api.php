@@ -28,4 +28,4 @@ Route::get("delete/{id}",[ExpenseController::class,'delete']);
 
 //category
 Route::post("category/add",[ExpenseController::class,'categoryAdd']);
-Route::get("category",[ExpenseController::class,'categoryList']);
+Route::get("category/{id}",[ExpenseController::class,'categoryList']);

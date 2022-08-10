@@ -70,13 +70,14 @@ class ExpenseController extends Controller
     {
         try {
             Category::Create($request->all());
+            return true;
         }catch (\Exception $e){
             return false;
         }
     }
 
-    public function categoryList()
+    public function categoryList($id)
     {
-        return Category::get();
+        return Category::where('parent_id',$id)->get();
     }
 }
